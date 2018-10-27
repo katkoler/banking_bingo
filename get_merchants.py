@@ -31,7 +31,7 @@ def get_merchant_id(merchant_Name):
 
 # merchant_info = get_merchant_name(merchant_id)
 # pprint(merchant_info['name'])
-# pprint(get_all_merchants())
+pprint(get_all_merchants())
 
 # print(get_merchant_id("Apple"))
 

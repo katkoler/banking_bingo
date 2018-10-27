@@ -1,0 +1,64 @@
+{
+     "task_name": "Spend more than £100 in a single transaction", 
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 100,
+     "status": false
+ }, {
+     "task_name": "spend £10 or more at tombola", 
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 10,
+     "merchant_name": "tombola",
+     "status": false
+ }, {
+     "task_name": "Buy something from Amazon Prime",
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 0,
+     "merchant_name": "Amazon Prime",
+    "status": false
+ }, {
+     "task_name": "Buy coffee at Starbucks", 
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 0,
+     "merchant_name": "Starbucks",
+    "status": false
+ }, {
+     "task_name": "Buy lunch from Subway", 
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 0,
+     "merchant_name": "Subway",
+    "status": false
+ }, 
+
+
+ {
+     "task_name": "Send money to savings account", 
+     "type_of_transaction": "transfer",
+      "transaction_ammount_min": 0,
+     "status": false
+ }, {
+   "task_name": "Payment to regular eSaver", 
+     "type_of_transaction": "transfer",
+     "transaction_ammount_min": 0,     
+   "status": false
+ }, {
+   "task_name": "Direct Debit to GiffGaff",
+    "transaction_ammount_min": 0,
+    "type_of_transaction": "transfer",
+   "status": false
+ }, 
+
+ {
+   "task_name": "Withdraw some cash", 
+   "type_of_transaction": "withdrawl",
+   "transaction_ammount_min": 0,
+   "status": false
+ }
+
+
+
+
+
+
+
+
+

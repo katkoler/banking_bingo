@@ -4,9 +4,9 @@ import json
 import config
 from pprint import pprint
 
-apiKey = os.environ["capitalone_api_key"]
+# apiKey = os.environ["capitalone_api_key"]
 
-accountId = os.environ["accountId"]
+# accountId = os.environ["accountId"]
 
 # Get a purchase 
 def get_purchases(account_id):

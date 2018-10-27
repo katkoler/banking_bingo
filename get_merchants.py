@@ -5,7 +5,7 @@ import config
 from pprint import pprint
 
 
-apiKey = os.environ["capitalone_api_key"]
+# apiKey = os.environ["capitalone_api_key"]
 merchant_id = "57cf75cea73e494d8675ec4a"
 
 def get_all_merchants():

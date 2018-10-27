@@ -6,7 +6,7 @@ import os
 from get_merchants import get_merchant_id
 from get_purchase import get_purchases
 
-import config #delete before deployment, but need it for local testing
+# import config #delete before deployment, but need it for local testing
 
 app = Flask("teamg_app")
 tasks_json_file = "task_match.json"
@@ -44,8 +44,6 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 		if type_of_transaction == "purchase":
 			task_merchant_name = task['merchant_name']
 			if task_merchant_name != 666:
-				print("6666666")
-				print(task.get('merchant_id'))
 				if task.get('merchant_id') == None:
 					task_mer_id = get_merchant_id(task_merchant_name)
 				else:
@@ -53,7 +51,6 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 				task_min_amount = task['transaction_amount_min']
 				for j, pur in enumerate(all_purchases):
 					if pur['merchant_id'] == task_mer_id:
-						print("still here")
 						if pur['amount'] >= task_min_amount:
 							task['status'] = "true"
 							print("how many times")

@@ -36,7 +36,7 @@
       "transaction_ammount_min": 0,
      "status": false
  }, {
-   "task_name": "Payment to regular eSaver", 
+   "task_name": "transfer to regular eSaver", 
      "type_of_transaction": "transfer",
      "transaction_ammount_min": 0,     
    "status": false

@@ -1,7 +1,6 @@
 [{
      "task_name": "Spend more than 100GBP in a single transaction", 
-     "merchant_id": "57cf75cea73e494d8675ec49",
-     "merchant_name": "Apple",
+     "merchant_name": 666,
      "type_of_transaction": "purchase",
      "transaction_amount_min": 100,
      "status": false
@@ -37,12 +36,12 @@
 
 
  {
-     "task_name": "Send money to savings account", 
+     "task_name": "Send money to a friend", 
      "type_of_transaction": "transfer",
      "transaction_amount_min": 0.01,
      "status": false
  }, {
-   "task_name": "transfer to regular eSaver", 
+   "task_name": "Transfer to regular another account", 
      "type_of_transaction": "transfer",
      "transaction_amount_min": 0.01,     
    "status": false
@@ -61,7 +60,7 @@
 
  {
    "task_name": "Withdraw some cash", 
-   "type_of_transaction": "withdrawl",
+   "type_of_transaction": "withdrawal",
    "transaction_amount_min": 0.01,
    "status": false
  }]

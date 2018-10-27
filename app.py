@@ -8,6 +8,8 @@ from get_purchase import get_purchases
 
 # import config #delete before deployment, but need it for local testing
 
+apiKey = os.environ["capitalone_api_key"] 
+
 app = Flask("teamg_app")
 tasks_json_file = "task_match.json"
 
@@ -68,12 +70,6 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 			updated_tasks.append(task)
 
 	return jsonify(updated_tasks)
-
-
-#     short_json = shorten_json(tweets)
-#     loc_json = geolocate_tweet(short_json)
-#     return jsonify({"markers": [tweet for i, tweet in enumerate(loc_json)]})
-
 
 """
 This piece of logic checks whether you are running the app locally or on Heroku

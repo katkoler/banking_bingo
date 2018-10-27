@@ -3,6 +3,8 @@ from flask.json import jsonify
 import json
 import requests
 import os
+from get_merchants import get_merchant_id
+from get_purchase import get_purchases
 
 import config #delete before deployment, but need it for local testing
 
@@ -32,16 +34,44 @@ def home():
 
 @app.route("/tasks/update/<account_id>",methods=['GET'])
 def update_tasks(account_id="5bd44f84322fa06b67793e85"):
+	updated_tasks = []
+	all_purchases = get_purchases(account_id)
+	# print(all_purchases)
 	for i, task in enumerate(task_data):
 		print(task)
 		type_of_transaction = task['type_of_transaction']
-		print(type_of_transaction)
+		# print(type_of_transaction)
 		if type_of_transaction == "purchase":
-			merchant_name = task['merchant_name']
-			if merchant_name != 666:
-				
-				# transaction_amount_min = task.get()
-				return merchant_name
+			task_merchant_name = task['merchant_name']
+			if task_merchant_name != 666:
+				print("6666666")
+				print(task.get('merchant_id'))
+				if task.get('merchant_id') == None:
+					task_mer_id = get_merchant_id(task_merchant_name)
+				else:
+					task_mer_id = task['merchant_id']
+				task_min_amount = task['transaction_amount_min']
+				for j, pur in enumerate(all_purchases):
+					if pur['merchant_id'] == task_mer_id:
+						print("still here")
+						if pur['amount'] >= task_min_amount:
+							task['status'] = "true"
+							print("how many times")
+							updated_tasks.append(task)
+			else:
+				updated_tasks.append(task)
+		elif type_of_transaction == "transfer":
+			print("transfer")
+			updated_tasks.append(task)
+		elif type_of_transaction == "withdrawl":
+			print("withdrawl")
+			updated_tasks.append(task)
+		else:
+			print("nothing")
+			updated_tasks.append(task)
+
+	return jsonify(updated_tasks)
+
 
 #     short_json = shorten_json(tweets)
 #     loc_json = geolocate_tweet(short_json)

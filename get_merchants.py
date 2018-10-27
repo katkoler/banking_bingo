@@ -4,6 +4,7 @@ import json
 import config
 from pprint import pprint
 
+
 apiKey = os.environ["capitalone_api_key"]
 merchant_id = "57cf75cea73e494d8675ec4a"
 
@@ -23,7 +24,6 @@ def get_merchant_id(merchant_Name):
 	response = json.loads(response.text)
 	for i, mer in enumerate(response):
 		if mer['name'] == merchant_Name:
-			print("working")
 			mer_id = mer["_id"]
 			return mer_id
 
@@ -31,7 +31,7 @@ def get_merchant_id(merchant_Name):
 
 # merchant_info = get_merchant_name(merchant_id)
 # pprint(merchant_info['name'])
-pprint(get_all_merchants())
+# pprint(get_all_merchants())
 
 # print(get_merchant_id("Apple"))
 

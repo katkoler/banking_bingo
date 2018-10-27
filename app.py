@@ -5,10 +5,12 @@ import requests
 import os
 from get_merchants import get_merchant_id
 from get_purchase import get_purchases
+from boto.s3.connection import S3Connection
+
 
 # import config #delete before deployment, but need it for local testing
 
-apiKey = os.environ["capitalone_api_key"] 
+apiKey = S3Connection(os.environ["capitalone_api_key"] )
 
 app = Flask("teamg_app")
 tasks_json_file = "task_match.json"

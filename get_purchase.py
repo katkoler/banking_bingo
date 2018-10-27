@@ -1,8 +1,8 @@
 import os
 import requests
 import json
-import config
-from pprint import pprint
+# import config #delete before deployment, but need it for local testing
+# from pprint import pprint
 
 # apiKey = os.environ["capitalone_api_key"]
 

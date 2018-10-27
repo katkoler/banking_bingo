@@ -1,7 +1,7 @@
 import os
 import requests
 import json
-import config
+# import config #delete before deployment, but need it for local testing
 from pprint import pprint
 
 

@@ -2,7 +2,7 @@ import os
 import requests
 import json
 # import config #delete before deployment, but need it for local testing
-from pprint import pprint
+# from pprint import pprint
 
 
 # apiKey = os.environ["capitalone_api_key"]
@@ -13,12 +13,12 @@ def get_all_merchants():
 	response = requests.get(url)
 	return json.loads(response.text)
 
-def get_merchant_name(merchant_Id):
+def get_merchant_name(merchant_Id, apiKey):
 	url= 'http://api.reimaginebanking.com/merchants/{}?key={}'.format(merchant_Id, apiKey)
 	response = requests.get(url)
 	return json.loads(response.text)
 
-def get_merchant_id(merchant_Name):
+def get_merchant_id(merchant_Name, apiKey):
 	url= 'http://api.reimaginebanking.com/merchants/?key={}'.format(apiKey)
 	response = requests.get(url)
 	response = json.loads(response.text)

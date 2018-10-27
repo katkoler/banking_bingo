@@ -5,14 +5,13 @@ import requests
 import os
 from get_merchants import get_merchant_id
 from get_purchase import get_purchases
-from boto.s3.connection import S3Connection
 
 
 # import config #delete before deployment, but need it for local testing
 
-apiKey = S3Connection(os.environ["capitalone_api_key"] )
+apiKey = os.environ["capitalone_api_key"]
 
-app = Flask("teamg_app")
+app = Flask("bangin_banking_bingo_app")
 tasks_json_file = "task_match.json"
 
 with open(tasks_json_file) as f:
@@ -39,7 +38,7 @@ def home():
 @app.route("/tasks/update/<account_id>",methods=['GET'])
 def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 	updated_tasks = []
-	all_purchases = get_purchases(account_id)
+	all_purchases = get_purchases(account_id, apiKey)
 	# print(all_purchases)
 	for i, task in enumerate(task_data):
 		print(task)
@@ -49,7 +48,7 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 			task_merchant_name = task['merchant_name']
 			if task_merchant_name != 666:
 				if task.get('merchant_id') == None:
-					task_mer_id = get_merchant_id(task_merchant_name)
+					task_mer_id = get_merchant_id(task_merchant_name, apiKey)
 				else:
 					task_mer_id = task['merchant_id']
 				task_min_amount = task['transaction_amount_min']

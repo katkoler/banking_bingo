@@ -9,7 +9,7 @@ import json
 # accountId = os.environ["accountId"]
 
 # Get a purchase 
-def get_purchases(account_id):
+def get_purchases(account_id, apiKey):
   url_pur = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(account_id,apiKey)
   response = requests.get(url_pur)
   return json.loads(response.text)

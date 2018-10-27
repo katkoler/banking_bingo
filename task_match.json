@@ -1,32 +1,37 @@
 [{
      "task_name": "Spend more than £100 in a single transaction", 
+     "merchant_id": "57cf75cea73e494d8675ec49",
+     "merchant_name": "Apple",
      "type_of_transaction": "purchase",
      "transaction_ammount_min": 100,
-     "merchant_name": 666,
      "status": false
  }, {
      "task_name": "spend £10 or more at tombola", 
+     "merchant_id": "5ade2542f0cec56abfa40730",
+     "merchant_name": "TESCO STORES 2128 ISLEWORTH",
      "type_of_transaction": "purchase",
      "transaction_ammount_min": 10,
-     "merchant_name": "tombola",
      "status": false
  }, {
-     "task_name": "Buy something from Amazon Prime",
+     "task_name": "Buy something from Amazon.com",
+     "merchant_id": "5b06eeeff0cec56abfa40907",
+     "merchant_name": "Amazon.com",
      "type_of_transaction": "purchase",
-     "transaction_ammount_min": 0,
-     "merchant_name": "Amazon Prime",
+     "transaction_ammount_min": 0.01,
     "status": false
  }, {
-     "task_name": "Buy coffee at Starbucks", 
+     "task_name": "Buy coffee at Starbucks",
+     "merchant_id": "57cf75cea73e494d8675edd7",
+     "merchant_name": "Starbucks", 
      "type_of_transaction": "purchase",
-     "transaction_ammount_min": 0,
-     "merchant_name": "Starbucks",
+     "transaction_ammount_min": 0.01,
     "status": false
  }, {
      "task_name": "Buy lunch from Subway", 
-     "type_of_transaction": "purchase",
-     "transaction_ammount_min": 0,
      "merchant_name": "Subway",
+     "merchant_id": "57cf75cea73e494d8675edad",
+     "type_of_transaction": "purchase",
+     "transaction_ammount_min": 0.01,
     "status": false
  }, 
 
@@ -34,24 +39,30 @@
  {
      "task_name": "Send money to savings account", 
      "type_of_transaction": "transfer",
-     "transaction_ammount_min": 0,
+     "transaction_ammount_min": 0.01,
      "status": false
  }, {
    "task_name": "transfer to regular eSaver", 
      "type_of_transaction": "transfer",
-     "transaction_ammount_min": 0,     
+     "transaction_ammount_min": 0.01,     
    "status": false
- }, {
-   "task_name": "Direct Debit to GiffGaff",
-    "transaction_ammount_min": 0,
-    "type_of_transaction": "transfer",
+ }, 
+
+
+ {
+   "task_name": "Make a purchase in Sheffield",
+   "merchant_id": "583aadf10fa692b34a9b89f4",
+   "merchant_name": "Balti King",
+    "transaction_ammount_min": 0.01,
+    "type_of_transaction": "purchase",
+    "location": "Sheffield",
    "status": false
  }, 
 
  {
    "task_name": "Withdraw some cash", 
    "type_of_transaction": "withdrawl",
-   "transaction_ammount_min": 0,
+   "transaction_ammount_min": 0.01,
    "status": false
  }]
 

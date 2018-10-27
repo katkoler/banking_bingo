@@ -10,9 +10,9 @@ customerId = os.environ["customerId"]
 url_pay = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customerId,apiKey)
 payload = {
   "type": "Savings",
-  "nickname": "Kirsty's Account",
-  "rewards": 1000000,
-  "balance": 1000000,	
+  "nickname": "Kirsty's Savings Account",
+  "rewards": 100,
+  "balance": 100,	
 }
 
 # Create a Savings Account

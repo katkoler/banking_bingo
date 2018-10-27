@@ -6,6 +6,7 @@ import config
 apiKey = os.environ["capitalone_api_key"]
 
 accountId = os.environ["accountId"]
+accountId2 = os.environ["accountId2"]
 
 url_pur = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(accountId,apiKey)
 
@@ -118,14 +119,6 @@ print(response)
 
 if response.status_code == 201:
 	print('purchases created')
-
-
-
-
-
-
-
-
 
 
 

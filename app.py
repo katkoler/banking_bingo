@@ -4,11 +4,11 @@ import json
 import requests
 import os
 import ast
-from get_activity import get_merchant_id, get_purchases, get_transactions, get_withdrawals, get_other_accounts, get_merchant_name
+from get_activity import get_merchant_id, get_purchases, get_transactions, get_withdrawals, get_other_accounts, get_merchant_name, get_merchant_location
 
 
 
-# import config #delete before deployment, but need it for local testing
+import config #delete before deployment, but need it for local testing
 
 apiKey = os.environ["capitalone_api_key"]
 
@@ -53,15 +53,26 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 						task_mer_id = get_merchant_id(task_merchant_name, apiKey)
 					else:
 						task_mer_id = task['merchant_id']
+					if task.get("location") != None:
+						mer_loc = task.get("location")
+						merchant_loc = get_merchant_location(task_mer_id, apiKey)
+						if mer_loc == merchant_loc:
+							task['status'] = "true"
+							updated_tasks.append(task)							
+					else:
+						task_min_amount = task['transaction_amount_min']
+						for j, pur in enumerate(all_purchases):
+							if pur['merchant_id'] == task_mer_id:
+								if pur['amount'] >= task_min_amount:
+									task['status'] = "true"
+									updated_tasks.append(task)
+				else:
 					task_min_amount = task['transaction_amount_min']
 					for j, pur in enumerate(all_purchases):
-						if pur['merchant_id'] == task_mer_id:
-							if pur['amount'] >= task_min_amount:
-								task['status'] = "true"
-								updated_tasks.append(task)
-				else:
-					#check if you made any puchases big enough than the amount specified in the task
-					updated_tasks.append(task)
+						if pur['amount'] >= task_min_amount:
+							task['status'] = "true"	
+							#check if you made any puchases big enough than the amount specified in the task
+							updated_tasks.append(task)
 			elif type_of_transaction == "transfer":
 				all_transactions = get_transactions(account_id, apiKey)
 				#get all accounts from you
@@ -100,7 +111,7 @@ def list_activities(account_id="5bd44f84322fa06b67793e85"):
 	all_transactions = get_transactions(account_id, apiKey)
 	all_withdrawals = get_withdrawals(account_id, apiKey)
 	for i, item in enumerate(all_purchases):
-		item['merchnat_name'] = get_merchant_name(item['merchant_id'], apiKey)
+		item['name'] = get_merchant_name(item['merchant_id'], apiKey)
 		activities.append(item)
 	for i, item in enumerate(all_withdrawals):
 		activities.append(item)

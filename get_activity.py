@@ -32,6 +32,14 @@ def get_merchant_id(merchant_Name, apiKey):
 			mer_id = mer["_id"]
 			return mer_id
 
+def get_merchant_location(merchant_Id, apiKey):
+	url= 'http://api.reimaginebanking.com/merchants/{}?key={}'.format(merchant_Id, apiKey)
+	response = requests.get(url)
+	response = json.loads(response.text)
+	print(response)
+	mer_location = response['address']['city']
+	return mer_location
+
 # def create_merchant(merchant_Name, category, )
 
 # merchant_info = get_merchant_name(merchant_id)

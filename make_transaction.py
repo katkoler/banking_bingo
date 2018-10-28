@@ -9,7 +9,7 @@ accountId = os.environ["accountId"]
 accountId2 = os.environ["accountId2"]
 
 
-url_trans = 'http://api.reimaginebanking.com/accounts/{}/transfers?key={}'.format(accountId,apiKey)
+url_trans = 'http://api.reimaginebanking.com/accounts/{}/transfers?key={}'.format(accountId2,apiKey)
 
 
 transfer = {

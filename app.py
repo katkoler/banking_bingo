@@ -43,6 +43,7 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 	for i, task in enumerate(task_data):
 		if task['status'] != "true":
 			print(task)
+			print(task['status'])
 			type_of_transaction = task['type_of_transaction']
 			#check if purchas meets a requirenment
 			if type_of_transaction == "purchase":
@@ -74,6 +75,8 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 							task['status'] = "true"	
 							#check if you made any puchases big enough than the amount specified in the task
 							updated_tasks.append(task)
+
+			#transfers
 			elif type_of_transaction == "transfer":
 				all_transactions = get_transactions(account_id, apiKey)
 				#get all accounts from you
@@ -87,10 +90,13 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 								updated_tasks.append(task)
 							else: 
 							#you have sent money to a friend
+								print("sending money to friend")
 								task['status'] = "true"
 								updated_tasks.append(task)
-					else:
-						updated_tasks.append(task)
+				print("printing it here")
+				updated_tasks.append(task)
+
+			#withdrawals
 			elif type_of_transaction == "withdrawal":
 				#check if there was a withdrawal
 				all_withdrawals = get_withdrawals(account_id, apiKey)

@@ -105,7 +105,7 @@ def list_activities(account_id="5bd44f84322fa06b67793e85"):
 		activities.append(item)
 	for i, item in enumerate(all_transactions):
 		if item['payer_id'] == account_id:
-			item['amount'] = "-"+item['amount']
+			item['amount'] = "-"+str(item['amount'])
 			activities.append(item)
 		else:
 			activities.append(item)

@@ -8,7 +8,7 @@ apiKey = os.environ["capitalone_api_key"]
 accountId = os.environ["accountId"]
 
 
-url_trans = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId,apiKey)
+url_with = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId,apiKey)
 
 
 withdrawl = {
@@ -21,7 +21,7 @@ withdrawl = {
 
 # Create a new transaction
 response = requests.post( 
-  url_trans, 
+  url_with, 
   data=json.dumps(withdrawl),
   headers={'content-type':'application/json'},
   )

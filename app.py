@@ -41,50 +41,56 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 	updated_tasks = []
 	# print(all_purchases)
 	for i, task in enumerate(task_data):
-		print(task)
-		type_of_transaction = task['type_of_transaction']
-		#check if purchas meets a requirenment
-		if type_of_transaction == "purchase":
-			all_purchases = get_purchases(account_id, apiKey)
-			task_merchant_name = task['merchant_name']
-			if task_merchant_name != 666:
-				if task.get('merchant_id') == None:
-					task_mer_id = get_merchant_id(task_merchant_name, apiKey)
-				else:
-					task_mer_id = task['merchant_id']
-				task_min_amount = task['transaction_amount_min']
-				for j, pur in enumerate(all_purchases):
-					if pur['merchant_id'] == task_mer_id:
-						if pur['amount'] >= task_min_amount:
-							task['status'] = "true"
-							updated_tasks.append(task)
-			else:
-				#check if you made any puchases big enough than the amount specified in the task
-				updated_tasks.append(task)
-		elif type_of_transaction == "transfer":
-			all_transactions = get_transactions(account_id, apiKey)
-			#get all accounts from you
-			other_accounts = get_other_accounts(account_id, apiKey)
-			for i, item in enumerate(all_transactions):
-				if item['payer_id'] == account_id:
-					if item['payer_id'] not in other_accounts:
-						#you have sent money to a friend
-						task['status'] = "true"
-						updated_tasks.append(task)
+		if task['status'] != "true":
+			print(task)
+			type_of_transaction = task['type_of_transaction']
+			#check if purchas meets a requirenment
+			if type_of_transaction == "purchase":
+				all_purchases = get_purchases(account_id, apiKey)
+				task_merchant_name = task['merchant_name']
+				if task_merchant_name != 666:
+					if task.get('merchant_id') == None:
+						task_mer_id = get_merchant_id(task_merchant_name, apiKey)
 					else:
-						#you have sent money to another one of your account
-						task['status'] = "true"
+						task_mer_id = task['merchant_id']
+					task_min_amount = task['transaction_amount_min']
+					for j, pur in enumerate(all_purchases):
+						if pur['merchant_id'] == task_mer_id:
+							if pur['amount'] >= task_min_amount:
+								task['status'] = "true"
+								updated_tasks.append(task)
+				else:
+					#check if you made any puchases big enough than the amount specified in the task
+					updated_tasks.append(task)
+			elif type_of_transaction == "transfer":
+				all_transactions = get_transactions(account_id, apiKey)
+				#get all accounts from you
+				other_accounts = get_other_accounts(account_id, apiKey)
+				for i, item in enumerate(all_transactions):
+					if item['payer_id'] == account_id:
+						if item['payee_id'] != account_id:
+							if item['payee_id'] in other_accounts:
+								#you have sent money to another one of your account
+								task['status'] = "true"
+								updated_tasks.append(task)
+							else: 
+							#you have sent money to a friend
+								task['status'] = "true"
+								updated_tasks.append(task)
+					else:
 						updated_tasks.append(task)
-			updated_tasks.append(task)
-		elif type_of_transaction == "withdrawal":
-			#check if there was a withdrawal
-			all_withdrawals = get_withdrawals(account_id, apiKey)
-			if len(all_withdrawals) > 0:
-				task['status'] = "true"
+			elif type_of_transaction == "withdrawal":
+				#check if there was a withdrawal
+				all_withdrawals = get_withdrawals(account_id, apiKey)
+				if len(all_withdrawals) > 0:
+					task['status'] = "true"
+					updated_tasks.append(task)
+				else:
+					updated_tasks.append(task)
+			else:
 				updated_tasks.append(task)
 		else:
 			updated_tasks.append(task)
-
 	return jsonify(updated_tasks)
 
 @app.route("/activity/<account_id>",methods=['GET'])
@@ -99,7 +105,7 @@ def list_activities(account_id="5bd44f84322fa06b67793e85"):
 		activities.append(item)
 	for i, item in enumerate(all_transactions):
 		if item['payer_id'] == account_id:
-			item['amount'] = "-"+item['amount']
+			item['amount'] = "-"+str(item['amount'])
 			activities.append(item)
 		else:
 			activities.append(item)

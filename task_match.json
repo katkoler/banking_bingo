@@ -41,7 +41,7 @@
      "transaction_amount_min": 0.01,
      "status": false
  }, {
-   "task_name": "Transfer to regular another account", 
+   "task_name": "Transfer to another account", 
      "type_of_transaction": "transfer",
      "transaction_amount_min": 0.01,     
    "status": false

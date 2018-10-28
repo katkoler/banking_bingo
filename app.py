@@ -4,7 +4,7 @@ import json
 import requests
 import os
 import ast
-from get_activity import get_merchant_id, get_purchases, get_transactions, get_withdrawals, get_other_accounts
+from get_activity import get_merchant_id, get_purchases, get_transactions, get_withdrawals, get_other_accounts, get_merchant_name
 
 
 
@@ -100,12 +100,13 @@ def list_activities(account_id="5bd44f84322fa06b67793e85"):
 	all_transactions = get_transactions(account_id, apiKey)
 	all_withdrawals = get_withdrawals(account_id, apiKey)
 	for i, item in enumerate(all_purchases):
+		item['merchnat_name'] = get_merchant_name(item['merchant_id'], apiKey)
 		activities.append(item)
 	for i, item in enumerate(all_withdrawals):
 		activities.append(item)
 	for i, item in enumerate(all_transactions):
-		if item['payer_id'] == account_id:
-			item['amount'] = "-"+str(item['amount'])
+		if item['payer_id'] != account_id:
+			item['amount'] = -item['amount']
 			activities.append(item)
 		else:
 			activities.append(item)

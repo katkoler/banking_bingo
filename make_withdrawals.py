@@ -15,7 +15,7 @@ withdrawl = {
   "medium": "balance",
   "transaction_date": "2018-10-27",
   "status": "pending",
-  "amount": 1995,
+  "amount": 5,
   "description": "string"
 }
 

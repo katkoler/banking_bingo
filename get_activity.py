@@ -18,7 +18,10 @@ def get_all_merchants():
 def get_merchant_name(merchant_Id, apiKey):
 	url= 'http://api.reimaginebanking.com/merchants/{}?key={}'.format(merchant_Id, apiKey)
 	response = requests.get(url)
-	return json.loads(response.text)
+	merchant_info = json.loads(response.text)
+	mer_name = merchant_info["name"]
+	return mer_name
+
 
 def get_merchant_id(merchant_Name, apiKey):
 	url= 'http://api.reimaginebanking.com/merchants/?key={}'.format(apiKey)

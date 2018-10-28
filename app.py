@@ -8,7 +8,7 @@ from get_activity import get_merchant_id, get_purchases, get_transactions, get_w
 
 
 
-import config #delete before deployment, but need it for local testing
+# import config #delete before deployment, but need it for local testing
 
 apiKey = os.environ["capitalone_api_key"]
 
@@ -59,6 +59,7 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 							task['status'] = "true"
 							updated_tasks.append(task)
 			else:
+				#check if you made any puchases big enough than the amount specified in the task
 				updated_tasks.append(task)
 		elif type_of_transaction == "transfer":
 			all_transactions = get_transactions(account_id, apiKey)

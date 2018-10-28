@@ -3,8 +3,9 @@ from flask.json import jsonify
 import json
 import requests
 import os
-from get_merchants import get_merchant_id
-from get_purchase import get_purchases
+import ast
+from get_activity import get_merchant_id, get_purchases, get_transactions, get_withdrawals, get_other_accounts
+
 
 
 # import config #delete before deployment, but need it for local testing
@@ -38,13 +39,13 @@ def home():
 @app.route("/tasks/update/<account_id>",methods=['GET'])
 def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 	updated_tasks = []
-	all_purchases = get_purchases(account_id, apiKey)
 	# print(all_purchases)
 	for i, task in enumerate(task_data):
 		print(task)
 		type_of_transaction = task['type_of_transaction']
-		# print(type_of_transaction)
+		#check if purchas meets a requirenment
 		if type_of_transaction == "purchase":
+			all_purchases = get_purchases(account_id, apiKey)
 			task_merchant_name = task['merchant_name']
 			if task_merchant_name != 666:
 				if task.get('merchant_id') == None:
@@ -56,21 +57,53 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 					if pur['merchant_id'] == task_mer_id:
 						if pur['amount'] >= task_min_amount:
 							task['status'] = "true"
-							print("how many times")
 							updated_tasks.append(task)
 			else:
+				#check if you made any puchases big enough than the amount specified in the task
 				updated_tasks.append(task)
 		elif type_of_transaction == "transfer":
-			print("transfer")
+			all_transactions = get_transactions(account_id, apiKey)
+			#get all accounts from you
+			other_accounts = get_other_accounts(account_id, apiKey)
+			for i, item in enumerate(all_transactions):
+				if item['payer_id'] == account_id:
+					if item['payer_id'] not in other_accounts:
+						#you have sent money to a friend
+						task['status'] = "true"
+						updated_tasks.append(task)
+					else:
+						#you have sent money to another one of your account
+						task['status'] = "true"
+						updated_tasks.append(task)
 			updated_tasks.append(task)
-		elif type_of_transaction == "withdrawl":
-			print("withdrawl")
-			updated_tasks.append(task)
+		elif type_of_transaction == "withdrawal":
+			#check if there was a withdrawal
+			all_withdrawals = get_withdrawals(account_id, apiKey)
+			if len(all_withdrawals) > 0:
+				task['status'] = "true"
+				updated_tasks.append(task)
 		else:
-			print("nothing")
 			updated_tasks.append(task)
 
 	return jsonify(updated_tasks)
+
+@app.route("/activity/<account_id>",methods=['GET'])
+def list_activities(account_id="5bd44f84322fa06b67793e85"):
+	activities = []
+	all_purchases = get_purchases(account_id, apiKey)
+	all_transactions = get_transactions(account_id, apiKey)
+	all_withdrawals = get_withdrawals(account_id, apiKey)
+	for i, item in enumerate(all_purchases):
+		activities.append(item)
+	for i, item in enumerate(all_withdrawals):
+		activities.append(item)
+	for i, item in enumerate(all_transactions):
+		if item['payer_id'] == account_id:
+			item['amount'] = "-"+item['amount']
+			activities.append(item)
+		else:
+			activities.append(item)
+	return jsonify(activities)
 
 """
 This piece of logic checks whether you are running the app locally or on Heroku

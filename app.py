@@ -8,7 +8,7 @@ from get_activity import get_merchant_id, get_purchases, get_transactions, get_w
 
 
 
-import config #delete before deployment, but need it for local testing
+# import config #delete before deployment, but need it for local testing
 
 apiKey = os.environ["capitalone_api_key"]
 
@@ -54,6 +54,7 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 					else:
 						task_mer_id = task['merchant_id']
 					if task.get("location") != None:
+						#check if a location specific task is set
 						mer_loc = task.get("location")
 						merchant_loc = get_merchant_location(task_mer_id, apiKey)
 						if mer_loc == merchant_loc:

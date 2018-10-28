@@ -6,9 +6,11 @@ import config
 apiKey = os.environ["capitalone_api_key"]
 
 accountId = os.environ["accountId"]
+accountId2 = os.environ["accountId2"]
+accountId3 = os.environ["accountId3"]
 
 
-url_with = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId,apiKey)
+url_with = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId2,apiKey)
 
 
 withdrawl = {
@@ -32,7 +34,7 @@ print(response)
 if response.status_code == 201:
   print('withdrawl made')
 
-
+#python make.withdrawals.py
 
 # Output
 # [

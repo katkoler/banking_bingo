@@ -7,8 +7,9 @@ apiKey = os.environ["capitalone_api_key"]
 
 accountId = os.environ["accountId"]
 accountId2 = os.environ["accountId2"]
+accountId3 = os.environ["accountId3"]
 
-url_pur = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(accountId2,apiKey)
+url_pur = 'http://api.reimaginebanking.com/accounts/{}/purchases?key={}'.format(accountId3,apiKey)
 
 # purchase = {
 #   "merchant_id": "57cf75cea73e494d8675ec4a",

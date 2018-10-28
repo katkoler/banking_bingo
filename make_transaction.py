@@ -7,15 +7,16 @@ apiKey = os.environ["capitalone_api_key"]
 
 accountId = os.environ["accountId"]
 accountId2 = os.environ["accountId2"]
+accountId3 = os.environ["accountId3"]
 
 
-url_trans = 'http://api.reimaginebanking.com/accounts/{}/transfers?key={}'.format(accountId2,apiKey)
+url_trans = 'http://api.reimaginebanking.com/accounts/{}/transfers?key={}'.format(accountId3,apiKey)
 
 
 transfer = {
   "medium": "balance",
   "payee_id": accountId2,
-  "transaction_date": "2018-10-27",
+  "transaction_date": "2018-10-26",
   "status": "pending",
   "amount": 199,
   "description": "string"

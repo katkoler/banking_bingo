@@ -87,12 +87,12 @@ def update_tasks(account_id="5bd44f84322fa06b67793e85"):
 							if item['payee_id'] in other_accounts:
 								#you have sent money to another one of your account
 								task['status'] = "true"
-								updated_tasks.append(task)
+								# updated_tasks.append(task)
 							else: 
 							#you have sent money to a friend
 								print("sending money to friend")
 								task['status'] = "true"
-								updated_tasks.append(task)
+								# updated_tasks.append(task)
 				print("printing it here")
 				updated_tasks.append(task)
 

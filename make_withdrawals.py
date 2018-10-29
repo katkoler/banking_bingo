@@ -10,14 +10,14 @@ accountId2 = os.environ["accountId2"]
 accountId3 = os.environ["accountId3"]
 
 
-url_with = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId2,apiKey)
+url_with = 'http://api.reimaginebanking.com/accounts/{}/withdrawals?key={}'.format(accountId3,apiKey)
 
 
 withdrawl = {
   "medium": "balance",
   "transaction_date": "2018-10-27",
   "status": "pending",
-  "amount": 5,
+  "amount": 10,
   "description": "string"
 }
 
